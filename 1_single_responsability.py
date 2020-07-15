@@ -4,30 +4,28 @@ make sure you encrypt his password.
 """)
 
 print("----------- WITHOUT Single Responsability Principle -----------")
-class New_user():
-	def __init__(self, name, password):
-		# A really complex code to encrypt the password:
-		self.__password = password[::-1]
-		# end of my complex code, now I will set basic info of the user:
-		self.name = name
+class User():
+	def __init__(self, name, password):	
+		self.__password = password[::-1] # this line is my really complex encryption algorithm xd
+		self.name = name # basic setup for the user
 
 	def get_pass(self):
 		return self.__password
 
-user1 = New_user("Noe", "MyNicePassword")
+user1 = User("Noe", "MyNicePassword")
 print(f"User: {user1.name}, Password: {user1.get_pass()}" )
 
-# You will need to change the class New_user if you only want to modify the encryption algorithm
+# You will need to change the User class if you only want to modify the encryption algorithm
 # Also you need to chage the class to modify things about the basic setup for the user
 
 
-print("\n----------- WITH Single Responsability Principle -----------")
-class encrypt():
+print("\n----------- WITH Single Responsability Principle ------------")
+class Encrypt():
 	def complex_algorithm(self, password):
 		# doing a lot of modification here for my really complex encryption algorithm:
 		return password[::-1].upper()
 
-class USER_SRP(encrypt):
+class UserSRP(Encrypt):
 	def __init__(self, name, password):
 		super().__init__()
 		self.__password = super().complex_algorithm(password)
@@ -36,7 +34,7 @@ class USER_SRP(encrypt):
 	def get_pass(self):
 		return self.__password
 
-New_user_SRP = USER_SRP("Andy", "ThisIsMyPasword")
+New_user_SRP = UserSRP("Andy", "ThisIsMyPasword")
 print(f"User: {New_user_SRP.name}, Password: {New_user_SRP.get_pass()}" )
 
 # Now you can make changes to the encryption algorithm in the class that is in charge of that
